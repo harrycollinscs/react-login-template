@@ -1,14 +1,30 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Login from './components/templates/Login'
+import Home from './components/templates/Home'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  }
+]);
+
+const App = () => {
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false)
 
   return (
-    <Login />
+    // Ideally, instead of <Home /> You'd have the entire app, and redirect all other url hits to <Login />
+    // !userIsLoggedIn ? <Login /> : <Home />
+    <RouterProvider router={router} />
   )
 }
 
